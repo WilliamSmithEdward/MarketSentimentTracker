@@ -161,7 +161,7 @@ def main() -> None:
     )
 
     html = render_market_report_html(analysis, title="Weekly Macro Market Brief")
-    with open("report.html", "w", encoding="utf-8") as f:
+    with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
 if __name__ == "__main__":
