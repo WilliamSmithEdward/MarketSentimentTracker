@@ -183,7 +183,7 @@ def main() -> None:
         - Lead with a clear market conclusion
         - Must not include any discussion of methodology, source constraints, or how the conclusion was reached
         - Must be written in plain English, suitable for a general audience, 6th grade reading level, and free of jargon
-        - 3 sentences in length.
+        - Four to five sentences in length.
 
         Input news JSON:
         {json.dumps(news_json, ensure_ascii=False)}
