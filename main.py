@@ -12,6 +12,8 @@ from web_scraper import get_json
 
 from market_report_html import render_market_report_html
 
+from html_to_pdf import html_file_to_pdf, html_string_to_pdf
+
 load_dotenv()
 
 ANALYSIS_SCHEMA = {
@@ -163,6 +165,8 @@ def main() -> None:
     html = render_market_report_html(analysis, title="Weekly Macro Market Brief")
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
+
+    html_string_to_pdf(html, "report.pdf")
 
 if __name__ == "__main__":
     main()
