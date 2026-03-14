@@ -157,6 +157,7 @@ def main() -> None:
         - Return values that strictly fit the schema
         - Do not add any keys not defined by the schema
         - Assume the reader understands only the provided input was used for the analysis, don't need to explicitly state this in the output
+        - Don't say "Using only these headlines" or similar in the output, just provide the analysis
 
         Input news JSON:
         {json.dumps(news_json, ensure_ascii=False)}
