@@ -141,23 +141,42 @@ def main() -> None:
 
     analysis = get_openai_json(
         f"""
-        You are a market analysis engine.
+        You are a market analysis engine writing for a public-facing market brief.
 
         Task:
         Analyze the following news JSON and estimate near-term directional bias for:
         - DJIA
         - S&P 500
 
-        Requirements:
-        - Use only the provided input
+        Audience and style requirements:
+        - Write in clear public-facing language
+        - Start directly with the market conclusion
+        - Do not use process language
+        - Do not mention the source format, headlines, supplied input, provided input, JSON, prompt, data limitations, or what you were given
+        - Do not open with phrases like:
+        - "Using only the supplied headlines"
+        - "Based on the provided input"
+        - "From the news JSON"
+        - "Given the data"
+        - The opening sentence must read like a published market note, not a model disclaimer
+        - Keep the tone neutral, concise, and professional
+
+        Analysis requirements:
+        - Use only the provided input internally
         - Do not claim certainty
         - If evidence is weak or mixed, return neutral
         - Focus on macro, rates, inflation, earnings, labor, geopolitics, and risk sentiment
         - Treat sensational or low-information headlines as lower quality evidence
         - Return values that strictly fit the schema
         - Do not add any keys not defined by the schema
-        - Assume the reader understands only the provided input was used for the analysis, don't need to explicitly state this in the output
-        - Don't say "Using only these headlines" or similar in the output, just provide the analysis
+
+        Specific content rules:
+        - final_vibe_summary must begin with a plain-English market takeaway
+        - final_vibe_summary must not mention methodology or source constraints
+        - Example acceptable opener:
+        "Near-term macro conditions remain slightly negative for broad U.S. equities."
+        - Example unacceptable opener:
+        "Using only the supplied headlines, the dominant near-term macro narrative is negative..."
 
         Input news JSON:
         {json.dumps(news_json, ensure_ascii=False)}
