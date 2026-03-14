@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weekly Macro Market Brief</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: rgba(255, 255, 255, 0.96);
+      --text: #102033;
+      --muted: #607089;
+      --border: rgba(16, 32, 51, 0.10);
+      --shadow: 0 18px 48px rgba(16, 32, 51, 0.10);
+      --shadow-soft: 0 10px 24px rgba(16, 32, 51, 0.06);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --bull: #117a57;
+      --bull-soft: rgba(17, 122, 87, 0.10);
+      --bear: #ad2338;
+      --bear-soft: rgba(173, 35, 56, 0.10);
+      --neutral: #7b61ff;
+      --neutral-soft: rgba(123, 97, 255, 0.10);
+      --amber: #b06a00;
+      --amber-soft: rgba(176, 106, 0, 0.10);
+      --line: rgba(16, 32, 51, 0.08);
+      --page-width: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(123, 97, 255, 0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(17, 122, 87, 0.07), transparent 24%),
+        linear-gradient(180deg, #f8fafe 0%, #f3f6fb 100%);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
+
+    .page {
+      width: min(var(--page-width), calc(100% - 48px));
+      margin: 40px auto 72px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 52px 52px 40px;
+      border: 1px solid var(--border);
+      border-radius: 36px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82)),
+        linear-gradient(135deg, rgba(123, 97, 255, 0.08), rgba(17, 122, 87, 0.04));
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123, 97, 255, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(16, 32, 51, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero__eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7b61ff, #117a57);
+    }
+
+    .hero__title {
+      margin: 18px 0 12px;
+      max-width: 920px;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .hero__subtitle {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .grid--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel__eyebrow {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .panel__title {
+      margin: 0 0 18px;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .bias-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .bias-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+    }
+
+    .bias-card--up {
+      background: linear-gradient(180deg, rgba(17, 122, 87, 0.08), rgba(255, 255, 255, 0.96));
+    }
+
+    .bias-card--down {
+      background: linear-gradient(180deg, rgba(173, 35, 56, 0.08), rgba(255, 255, 255, 0.96));
+    }
+
+    .bias-card--neutral,
+    .bias-card--mixed {
+      background: linear-gradient(180deg, rgba(123, 97, 255, 0.08), rgba(255, 255, 255, 0.96));
+    }
+
+    .bias-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .bias-card__header h4 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .bias-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .bias-card__body {
+      margin: 0;
+      color: #324256;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .pill--up {
+      color: var(--bull);
+      background: var(--bull-soft);
+      border-color: rgba(17, 122, 87, 0.16);
+    }
+
+    .pill--down {
+      color: var(--bear);
+      background: var(--bear-soft);
+      border-color: rgba(173, 35, 56, 0.16);
+    }
+
+    .pill--neutral,
+    .pill--mixed {
+      color: var(--neutral);
+      background: var(--neutral-soft);
+      border-color: rgba(123, 97, 255, 0.16);
+    }
+
+    .pill--low {
+      color: var(--amber);
+      background: var(--amber-soft);
+      border-color: rgba(176, 106, 0, 0.16);
+    }
+
+    .pill--medium {
+      color: #5c4a00;
+      background: rgba(233, 199, 88, 0.18);
+      border-color: rgba(176, 106, 0, 0.14);
+    }
+
+    .pill--high {
+      color: var(--bull);
+      background: var(--bull-soft);
+      border-color: rgba(17, 122, 87, 0.16);
+    }
+
+    .summary-panel__text {
+      margin: 0;
+      color: #324256;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .list-panel__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .list-panel__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .list-panel__item:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .list-panel__item::before {
+      content: "";
+      flex: 0 0 10px;
+      width: 10px;
+      height: 10px;
+      margin-top: 9px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7b61ff, #117a57);
+      box-shadow: 0 0 0 5px rgba(123, 97, 255, 0.07);
+    }
+
+    .list-panel__item span {
+      color: #324256;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .sentiment {
+      padding: 32px;
+    }
+
+    .sentiment__topline {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .sentiment__row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .sentiment__scoreblock {
+      min-width: 170px;
+    }
+
+    .sentiment__score {
+      font-size: 52px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
+
+    .sentiment__score span {
+      margin-left: 4px;
+      font-size: 24px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .sentiment__label {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .sentiment__meter-wrap {
+      flex: 1;
+    }
+
+    .sentiment__meter {
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(16, 32, 51, 0.08);
+      box-shadow: inset 0 1px 2px rgba(16, 32, 51, 0.05);
+    }
+
+    .sentiment__meter-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ad2338 0%, #e5af37 55%, #117a57 100%);
+    }
+
+    .sentiment__summary {
+      margin: 14px 0 0;
+      color: #324256;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .recommendations {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .grid--2,
+      .grid--3,
+      .recommendations,
+      .bias-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 40px 28px 30px;
+      }
+
+      .page {
+        width: min(var(--page-width), calc(100% - 28px));
+        margin: 20px auto 48px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .panel {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .hero__subtitle {
+        font-size: 16px;
+      }
+
+      .sentiment__row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bias-card__header {
+        flex-direction: column;
+      }
+
+      .bias-card__meta {
+        justify-content: flex-start;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        width: 100%;
+        margin: 0;
+      }
+
+      .hero,
+      .panel {
+        box-shadow: none;
+        backdrop-filter: none;
+        background: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero__eyebrow">Market briefing</div>
+      <h1 class="hero__title">Weekly Macro Market Brief</h1>
+      <p class="hero__subtitle">Using only the supplied headlines, the macro signal is mildly bearish for U.S. equities in the near term. The strongest evidence comes from mainstream sources pointing to a worsening inflation backdrop, an oil-supply shock tied to the Iran conflict, emerging cracks in GDP/consumer/labor data, and tighter financial conditions via jittery bonds and higher mortgage rates. The slight easing in oil and some sector-specific outperformance help temper the downside case, but they do not outweigh the broad negative implications for earnings multiples, consumer demand, and general risk appetite. Hence, both indexes skew down rather than neutral, but with medium—not high—confidence because geopolitical headlines can reverse quickly.</p>
+    </section>
+
+    <div class="grid grid--2">
+      
+      <section class="panel panel--index">
+        <div class="panel__eyebrow">Index outlook</div>
+        <h3 class="panel__title">Dow Jones Industrial Average</h3>
+        <div class="bias-grid">
+          
+        <article class="bias-card bias-card--down">
+          <div class="bias-card__header">
+            <h4>1 Day Bias</h4>
+            <div class="bias-card__meta">
+              <span class="pill pill--direction pill--down">Bearish</span>
+              <span class="pill pill--confidence pill--medium">Medium confidence</span>
+            </div>
+          </div>
+          <p class="bias-card__body">Near-term news flow tilts negative for the Dow: surprise inflation and weak GDP signals, rising gasoline and oil prices tied to the Iran war, and reports of bond-market jitters and higher mortgage rates all point to tighter financial conditions and weaker growth sentiment. The Dow was described as fading after early gains and having recently closed at a 2026 low. A slight easing in oil offers some relief, but the overall macro and risk backdrop remains cautious.</p>
+        </article>
+    
+          
+        <article class="bias-card bias-card--down">
+          <div class="bias-card__header">
+            <h4>5 Day Bias</h4>
+            <div class="bias-card__meta">
+              <span class="pill pill--direction pill--down">Bearish</span>
+              <span class="pill pill--confidence pill--medium">Medium confidence</span>
+            </div>
+          </div>
+          <p class="bias-card__body">Over the next week, the dominant themes are persistent inflation, oil above prior levels due to a major supply disruption, and evidence the U.S. economy was already softening before the war shock. That combination raises stagflation concerns and can weigh on large cyclical and rate-sensitive Dow components. While defensive commodity-linked pockets may outperform, the broader index backdrop appears more pressured than supportive.</p>
+        </article>
+    
+        </div>
+      </section>
+    
+      
+      <section class="panel panel--index">
+        <div class="panel__eyebrow">Index outlook</div>
+        <h3 class="panel__title">S&amp;P 500</h3>
+        <div class="bias-grid">
+          
+        <article class="bias-card bias-card--down">
+          <div class="bias-card__header">
+            <h4>1 Day Bias</h4>
+            <div class="bias-card__meta">
+              <span class="pill pill--direction pill--down">Bearish</span>
+              <span class="pill pill--confidence pill--medium">Medium confidence</span>
+            </div>
+          </div>
+          <p class="bias-card__body">The S&amp;P 500 faces a negative short-term mix of higher inflation, rising energy costs, geopolitical uncertainty, and weak breadth. Coverage notes the index was heading for a third straight losing week, with about 80% of stocks down even as oil eased slightly. Sector-level winners in materials and fertilizer suggest narrow leadership rather than healthy risk appetite, which is usually not constructive for the broad index.</p>
+        </article>
+    
+          
+        <article class="bias-card bias-card--down">
+          <div class="bias-card__header">
+            <h4>5 Day Bias</h4>
+            <div class="bias-card__meta">
+              <span class="pill pill--direction pill--down">Bearish</span>
+              <span class="pill pill--confidence pill--medium">Medium confidence</span>
+            </div>
+          </div>
+          <p class="bias-card__body">For the coming week, the balance of evidence remains bearish-leaning: inflation worsened before the latest energy shock, the economy showed cracks, labor and consumer conditions were described as weakening, and the Iran conflict risks prolonged pressure on oil and shipping. Those factors can compress valuations and earnings expectations across the broad market. A durable rebound would likely need clearer de-escalation or a stronger drop in oil, neither of which is established in the input.</p>
+        </article>
+    
+        </div>
+      </section>
+    
+    </div>
+
+    <div class="grid">
+      
+      <section class="panel sentiment sentiment--bearish">
+        <div class="sentiment__topline">Market sentiment</div>
+        <div class="sentiment__row">
+          <div class="sentiment__scoreblock">
+            <div class="sentiment__score">3<span>/10</span></div>
+            <div class="sentiment__label">Cautious</div>
+          </div>
+          <div class="sentiment__meter-wrap">
+            <div class="sentiment__meter">
+              <div class="sentiment__meter-fill" style="width: 30%;"></div>
+            </div>
+            <p class="sentiment__summary">Near-term vibe: cautious to negative. Geopolitical oil shock plus sticky inflation and softer growth keep pressure on both the Dow and S&amp;P 500, with only limited relief from a small pullback in oil.</p>
+          </div>
+        </div>
+      </section>
+    
+    </div>
+
+    <div class="grid grid--2">
+      
+      <section class="panel summary-panel ">
+        <h3 class="panel__title">Explain Like I&#x27;m 5</h3>
+        <p class="summary-panel__text">The market is worried because fighting with Iran is making oil and gas more expensive. That can make everything cost more and slow the economy, so stocks may have a tough few days.</p>
+      </section>
+    
+      
+      <section class="panel summary-panel ">
+        <h3 class="panel__title">Explain Like I&#x27;m 12</h3>
+        <p class="summary-panel__text">Stocks look shaky because the news points to two problems at once: prices may keep rising and the economy may be slowing. When oil jumps because of war, investors usually get more careful, which hurts big indexes like the Dow and S&amp;P 500.</p>
+      </section>
+    
+    </div>
+
+    <div class="grid grid--2">
+      
+      <section class="panel summary-panel ">
+        <h3 class="panel__title">Explain Like I&#x27;m 18</h3>
+        <p class="summary-panel__text">The near-term setup is risk-off. Inflation was already sticky, then the Iran war pushed oil and gasoline higher, increasing stagflation concerns. At the same time, reports suggest growth and labor conditions were weakening before the latest shock. Even though oil eased a bit intraday, breadth and sentiment still look weak, so both the DJIA and S&amp;P 500 lean modestly lower over 1 to 5 days.</p>
+      </section>
+    
+      
+      <section class="panel summary-panel ">
+        <h3 class="panel__title">Professional Summary</h3>
+        <p class="summary-panel__text">Using only the supplied headlines, the macro signal is mildly bearish for U.S. equities in the near term. The strongest evidence comes from mainstream sources pointing to a worsening inflation backdrop, an oil-supply shock tied to the Iran conflict, emerging cracks in GDP/consumer/labor data, and tighter financial conditions via jittery bonds and higher mortgage rates. The slight easing in oil and some sector-specific outperformance help temper the downside case, but they do not outweigh the broad negative implications for earnings multiples, consumer demand, and general risk appetite. Hence, both indexes skew down rather than neutral, but with medium—not high—confidence because geopolitical headlines can reverse quickly.</p>
+      </section>
+    
+    </div>
+
+    <div class="grid grid--3">
+      
+      <section class="panel list-panel ">
+        <h3 class="panel__title">Key Drivers</h3>
+        <ul class="list-panel__list">
+          <li class="list-panel__item"><span>Iran war-driven oil supply disruption is pushing oil and gasoline prices higher, worsening inflation risk.</span></li><li class="list-panel__item"><span>AP reports inflation rose before the war shock, implying the Fed may have less room to ease.</span></li><li class="list-panel__item"><span>AP and Washington Post describe a softening U.S. economy with weak growth, tepid consumption, and a weakening labor market.</span></li><li class="list-panel__item"><span>Bond market jitters and higher mortgage rates suggest tighter financial conditions.</span></li><li class="list-panel__item"><span>Risk sentiment is fragile: the S&amp;P 500 was heading for a third straight losing week and market breadth was weak.</span></li><li class="list-panel__item"><span>Sector leadership is narrow, with materials and fertilizer stocks benefiting from the shock while most stocks lag.</span></li><li class="list-panel__item"><span>A modest easing in oil prices provided only limited short-term relief.</span></li>
+        </ul>
+      </section>
+    
+      
+      <section class="panel list-panel ">
+        <h3 class="panel__title">Counterarguments</h3>
+        <ul class="list-panel__list">
+          <li class="list-panel__item"><span>Oil eased slightly during Friday trading, which could reduce immediate panic.</span></li><li class="list-panel__item"><span>Some defensive and commodity-linked sectors are outperforming, cushioning index losses somewhat.</span></li><li class="list-panel__item"><span>There are suggestions this is not necessarily a full 1970s-style stagflation repeat.</span></li><li class="list-panel__item"><span>Any de-escalation in Iran or easing of shipping disruption could quickly improve sentiment.</span></li>
+        </ul>
+      </section>
+    
+      
+      <section class="panel list-panel ">
+        <h3 class="panel__title">What Would Change the View</h3>
+        <ul class="list-panel__list">
+          <li class="list-panel__item"><span>Clear de-escalation in the Iran conflict leading to a sustained drop in oil and gasoline prices.</span></li><li class="list-panel__item"><span>Evidence that inflation is cooling despite the energy shock, improving expectations for Fed flexibility.</span></li><li class="list-panel__item"><span>Stronger market breadth with fewer stocks declining and the S&amp;P 500 breaking its recent losing streak.</span></li><li class="list-panel__item"><span>Data showing consumer spending, labor conditions, or growth are holding up better than feared.</span></li><li class="list-panel__item"><span>Stabilization in bond markets and lower yields or mortgage rates easing financial conditions.</span></li>
+        </ul>
+      </section>
+    
+    </div>
+
+    <div class="grid">
+      <section class="panel">
+        <h3 class="panel__title">Positioning and Reentry</h3>
+        <div class="recommendations">
+          <div>
+            <div class="panel__eyebrow">Long position</div>
+            <p class="summary-panel__text">If taking long exposure, keep it cautious and selective rather than aggressive broad-index buying. The news favors defensive or commodity-linked areas more than a full-market risk-on stance, so broad longs in the DJIA or S&amp;P 500 look less attractive until oil, inflation, or geopolitical pressure clearly improves.</p>
+          </div>
+          <div>
+            <div class="panel__eyebrow">Reentry conditions</div>
+            <p class="summary-panel__text">For sidelined investors, a more favorable reentry would likely come after signs of de-escalation, sustained easing in oil prices, and confirmation that inflation and bond-market stress are not accelerating. Without that, scaling in slowly rather than making a large immediate reentry appears more consistent with the current news backdrop.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="footer-note">Generated from structured JSON input.</p>
+  </main>
+</body>
+</html>
