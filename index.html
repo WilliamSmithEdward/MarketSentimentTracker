@@ -78,6 +78,14 @@
       pointer-events: none;
     }
 
+    .hero__topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .hero__eyebrow {
       display: inline-flex;
       align-items: center;
@@ -99,6 +107,33 @@
       height: 8px;
       border-radius: 999px;
       background: linear-gradient(180deg, #7b61ff, #117a57);
+    }
+
+    .hero__date-wrap {
+      padding: 10px 14px 11px;
+      border: 1px solid rgba(16, 32, 51, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.70);
+      text-align: right;
+      min-width: 220px;
+    }
+
+    .hero__date-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+    }
+
+    .hero__date {
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--text);
     }
 
     .hero__title {
@@ -416,6 +451,16 @@
         font-size: 16px;
       }
 
+      .hero__topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero__date-wrap {
+        text-align: left;
+        min-width: 0;
+      }
+
       .sentiment__row {
         flex-direction: column;
         align-items: stretch;
@@ -452,9 +497,17 @@
 <body>
   <main class="page">
     <section class="hero">
-      <div class="hero__eyebrow">Market briefing</div>
+      <div class="hero__topbar">
+        <div class="hero__eyebrow">Market briefing</div>
+        
+      <div class="hero__date-wrap">
+        <div class="hero__date-label">Report Date</div>
+        <div class="hero__date">Saturday, March 14, 2026</div>
+      </div>
+    
+      </div>
       <h1 class="hero__title">Weekly Macro Market Brief</h1>
-      <p class="hero__subtitle">Near-term conditions are mildly bearish for both the Dow and S&amp;P 500. The dominant macro story is an adverse combination of persistent inflation, slowing activity, and an oil-driven geopolitical shock. That environment tends to compress equity multiples, pressure consumer spending, and weigh on cyclicals, although energy and materials can act as partial offsets.</p>
+      <p class="hero__subtitle">The near-term bias for both the DJIA and S&amp;P 500 is modestly negative. Markets are absorbing a difficult macro combination: elevated inflation, weakening growth, higher energy costs, and geopolitical uncertainty tied to Iran. That backdrop raises concern about consumer demand, corporate margins, and interest-rate expectations, while weak breadth suggests the pressure is broad rather than isolated. Energy and materials strength may soften the blow for the S&amp;P 500, but not enough to shift the overall short-term bias positive.</p>
     </section>
 
     <div class="grid grid--2">
@@ -472,7 +525,7 @@
               <span class="pill pill--confidence pill--medium">Medium confidence</span>
             </div>
           </div>
-          <p class="bias-card__body">Near-term pressure remains tilted lower as hotter inflation, weak GDP signals, and rising oil prices reinforce stagflation concerns. The Dow is also more exposed to cyclical and industrial names that can be hurt by higher input costs and softer growth, even if energy-related components provide some offset.</p>
+          <p class="bias-card__body">Near-term pressure looks slightly negative as hotter inflation, weak GDP signals, and war-driven oil prices raise concerns about growth and interest rates at the same time. The Dow is also more exposed to cyclical and old-economy sectors that can feel the hit from higher input costs and weaker demand.</p>
         </article>
     
           
@@ -484,7 +537,7 @@
               <span class="pill pill--confidence pill--medium">Medium confidence</span>
             </div>
           </div>
-          <p class="bias-card__body">Over the next week, the balance of risk still points lower because the market is contending with persistent inflation, a weaker economic backdrop, and geopolitical stress tied to oil supply disruption. Any bounce from easing oil on a given day could help, but the broader setup remains challenging for the Dow.</p>
+          <p class="bias-card__body">Over the next week, the mix of rising energy costs, signs of a softer economy, and reduced confidence in traditional risk hedges points to continued caution. Any bounce from temporary easing in oil could help, but the broader setup still leans negative for the Dow.</p>
         </article>
     
         </div>
@@ -504,7 +557,7 @@
               <span class="pill pill--confidence pill--medium">Medium confidence</span>
             </div>
           </div>
-          <p class="bias-card__body">The S&amp;P 500 faces a modest negative near-term bias as elevated oil, firmer inflation, and slowing growth weigh on risk appetite. Breadth appears weak, and recent losses suggest investors are cautious despite occasional relief rallies when oil pulls back.</p>
+          <p class="bias-card__body">The S&amp;P 500 faces a mildly negative short-term backdrop as sticky inflation and the oil shock add to worries about margins, consumer spending, and Fed flexibility. Breadth has also been weak, with losses spread across much of the index despite isolated strength in energy and materials.</p>
         </article>
     
           
@@ -516,7 +569,7 @@
               <span class="pill pill--confidence pill--medium">Medium confidence</span>
             </div>
           </div>
-          <p class="bias-card__body">The five-day outlook remains slightly negative because the main macro drivers point to tighter financial conditions and weaker consumer spending power. Higher energy costs and inflation risk can pressure both margins and valuation multiples, even though defensive, materials, and energy pockets may outperform.</p>
+          <p class="bias-card__body">The five-day tone remains slightly bearish because the market is dealing with a stagflation-like mix of higher prices and softer growth. Sector winners tied to commodities may cushion the index, but broad risk sentiment still appears fragile.</p>
         </article>
     
         </div>
@@ -537,7 +590,7 @@
             <div class="sentiment__meter">
               <div class="sentiment__meter-fill" style="width: 30%;"></div>
             </div>
-            <p class="sentiment__summary">Near-term macro conditions remain slightly negative for broad U.S. equities. Higher oil prices, sticky inflation, weaker growth signals, and war-driven risk aversion are outweighing the support from isolated sector winners, leaving both the Dow and S&amp;P 500 biased modestly lower over the next few sessions.</p>
+            <p class="sentiment__summary">Near-term conditions remain slightly negative for broad U.S. stocks. Rising oil prices, stubborn inflation, and signs of slower growth are keeping investors cautious. A short bounce is possible if energy prices ease, but the overall mood still looks fragile.</p>
           </div>
         </div>
       </section>
@@ -548,13 +601,13 @@
       
       <section class="panel summary-panel ">
         <h3 class="panel__title">Explain Like I&#x27;m 5</h3>
-        <p class="summary-panel__text">Stocks look a little shaky right now because higher oil prices can make lots of things more expensive, and that can slow the economy. If oil calms down, stocks could feel better, but for now the mood is cautious.</p>
+        <p class="summary-panel__text">Stocks may have a hard time going up right now because gas and oil prices are rising and that can make many things more expensive. People are also worried the economy was already slowing down. That mix usually makes investors more careful.</p>
       </section>
     
       
       <section class="panel summary-panel ">
         <h3 class="panel__title">Explain Like I&#x27;m 12</h3>
-        <p class="summary-panel__text">The market outlook is slightly negative because investors are worried about two bad things happening together: prices staying high and growth slowing down. Rising oil from the Iran conflict adds to inflation pressure, and recent economic numbers already looked softer.</p>
+        <p class="summary-panel__text">The short-term outlook for big U.S. stock indexes looks a bit negative. Higher oil prices can push inflation up and hurt spending, while recent data suggest the economy was already weakening. A small rebound is possible if oil cools down, but the overall mood still looks cautious.</p>
       </section>
     
     </div>
@@ -563,13 +616,13 @@
       
       <section class="panel summary-panel ">
         <h3 class="panel__title">Explain Like I&#x27;m 18</h3>
-        <p class="summary-panel__text">The short-term setup for U.S. stocks leans negative as markets price in stagflation risk: sticky inflation, weaker growth, and higher energy costs. That mix can hurt earnings expectations and keep interest-rate pressure elevated, even if there are brief rebounds when oil pulls back.</p>
+        <p class="summary-panel__text">Near-term conditions lean slightly bearish for both the Dow and the S&amp;P 500. The main issue is a tough mix of sticky inflation, softer growth, and a geopolitical oil shock, which can squeeze company profits and limit how supportive monetary policy can be. Commodity-related stocks may hold up better, but broad equity sentiment still appears under pressure.</p>
       </section>
     
       
       <section class="panel summary-panel ">
         <h3 class="panel__title">Professional Summary</h3>
-        <p class="summary-panel__text">Near-term conditions are mildly bearish for both the Dow and S&amp;P 500. The dominant macro story is an adverse combination of persistent inflation, slowing activity, and an oil-driven geopolitical shock. That environment tends to compress equity multiples, pressure consumer spending, and weigh on cyclicals, although energy and materials can act as partial offsets.</p>
+        <p class="summary-panel__text">The near-term bias for both the DJIA and S&amp;P 500 is modestly negative. Markets are absorbing a difficult macro combination: elevated inflation, weakening growth, higher energy costs, and geopolitical uncertainty tied to Iran. That backdrop raises concern about consumer demand, corporate margins, and interest-rate expectations, while weak breadth suggests the pressure is broad rather than isolated. Energy and materials strength may soften the blow for the S&amp;P 500, but not enough to shift the overall short-term bias positive.</p>
       </section>
     
     </div>
@@ -579,7 +632,7 @@
       <section class="panel list-panel ">
         <h3 class="panel__title">Key Drivers</h3>
         <ul class="list-panel__list">
-          <li class="list-panel__item"><span>Oil above recent levels is lifting inflation fears and raising the risk of slower growth.</span></li><li class="list-panel__item"><span>Fresh inflation readings suggest price pressures were already sticky before the latest energy shock.</span></li><li class="list-panel__item"><span>Economic reports point to weakening growth and signs of strain in the U.S. consumer backdrop.</span></li><li class="list-panel__item"><span>Geopolitical conflict is worsening risk sentiment and increasing concern about supply-chain and shipping disruptions.</span></li><li class="list-panel__item"><span>Bond-market jitters and higher rates reduce support for equity valuations.</span></li><li class="list-panel__item"><span>Market breadth looks weak, with many stocks falling even as a few commodity-linked sectors outperform.</span></li>
+          <li class="list-panel__item"><span>Oil prices above recent levels are lifting inflation and hurting risk appetite.</span></li><li class="list-panel__item"><span>Fresh inflation data suggest price pressures were already sticky before the latest energy shock.</span></li><li class="list-panel__item"><span>Growth data point to an economy that was losing momentum before the jump in fuel costs.</span></li><li class="list-panel__item"><span>Geopolitical tension around Iran is raising shipping, energy, and consumer-cost risks.</span></li><li class="list-panel__item"><span>Broad market breadth has been weak, suggesting pressure is wider than a few large stocks.</span></li><li class="list-panel__item"><span>Some support comes from easing oil late in the session and strength in energy and materials shares.</span></li>
         </ul>
       </section>
     
@@ -587,7 +640,7 @@
       <section class="panel list-panel ">
         <h3 class="panel__title">Counterarguments</h3>
         <ul class="list-panel__list">
-          <li class="list-panel__item"><span>Oil eased slightly during the session, which could support a short-term relief bounce.</span></li><li class="list-panel__item"><span>Energy, materials, and some defensive groups are benefiting from the commodity shock.</span></li><li class="list-panel__item"><span>If the geopolitical situation stabilizes quickly, risk assets could recover faster than expected.</span></li><li class="list-panel__item"><span>Not all comparisons to past stagflation episodes imply the same severity this time.</span></li>
+          <li class="list-panel__item"><span>A modest pullback in oil prices could quickly relieve some pressure on equities.</span></li><li class="list-panel__item"><span>Commodity-linked sectors such as energy and materials can help offset weakness elsewhere in the S&amp;P 500.</span></li><li class="list-panel__item"><span>If the conflict stabilizes, sentiment could improve faster than the economic data.</span></li><li class="list-panel__item"><span>Short-term selling may already reflect a meaningful amount of bad news.</span></li>
         </ul>
       </section>
     
@@ -595,7 +648,7 @@
       <section class="panel list-panel ">
         <h3 class="panel__title">What Would Change the View</h3>
         <ul class="list-panel__list">
-          <li class="list-panel__item"><span>A sustained drop in oil prices and clearer signs that supply disruption is easing.</span></li><li class="list-panel__item"><span>Evidence that inflation is cooling despite the energy shock.</span></li><li class="list-panel__item"><span>Stronger economic or labor data that reduce recession concerns.</span></li><li class="list-panel__item"><span>Calmer geopolitical headlines and improved market breadth across sectors.</span></li><li class="list-panel__item"><span>A visible decline in bond yields that eases valuation pressure on equities.</span></li>
+          <li class="list-panel__item"><span>A clear and sustained drop in oil prices would make the outlook less negative.</span></li><li class="list-panel__item"><span>Evidence that inflation is cooling despite higher energy costs would reduce rate pressure.</span></li><li class="list-panel__item"><span>Signs of de-escalation in the Iran conflict or smoother shipping flows would improve risk sentiment.</span></li><li class="list-panel__item"><span>Broader market participation on rebounds, not just gains in a few defensive or commodity sectors, would support a more neutral or positive stance.</span></li>
         </ul>
       </section>
     
@@ -607,11 +660,11 @@
         <div class="recommendations">
           <div>
             <div class="panel__eyebrow">Long position</div>
-            <p class="summary-panel__text">New long exposure should be selective rather than aggressive. Favor scaling in gradually, emphasizing high-quality balance sheets and sectors with resilience to inflation and energy shocks, while avoiding broad chase buying until oil and rate pressure cool.</p>
+            <p class="summary-panel__text">Caution is warranted on new broad-index long positions right now. If adding exposure, scaling in slowly and favoring higher-quality, defensive, or energy-linked names may be more prudent than aggressive buying.</p>
           </div>
           <div>
             <div class="panel__eyebrow">Reentry conditions</div>
-            <p class="summary-panel__text">A more attractive reentry would come after either a clear pullback in oil, improving inflation and growth signals, or evidence that the market can hold gains with broader participation. Until then, staggered entries are more prudent than an all-at-once move.</p>
+            <p class="summary-panel__text">A more attractive reentry point would likely come after oil prices stabilize, market breadth improves, and inflation or growth fears ease. Waiting for confirmation of calmer risk conditions may be wiser than chasing a brief bounce.</p>
           </div>
         </div>
       </section>

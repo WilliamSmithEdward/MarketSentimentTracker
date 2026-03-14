@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import html
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -145,6 +146,16 @@ def _render_sentiment(score: Any, final_summary: str) -> str:
     """
 
 
+def _render_report_date() -> str:
+    formatted_date = datetime.now().strftime("%A, %B %d, %Y")
+    return f"""
+      <div class="hero__date-wrap">
+        <div class="hero__date-label">Report Date</div>
+        <div class="hero__date">{_escape(formatted_date)}</div>
+      </div>
+    """
+
+
 def _build_html_document(data: Mapping[str, Any], title: str) -> str:
     djia = data.get("djia", {})
     sp500 = data.get("sp500", {})
@@ -242,6 +253,14 @@ def _build_html_document(data: Mapping[str, Any], title: str) -> str:
       pointer-events: none;
     }}
 
+    .hero__topbar {{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }}
+
     .hero__eyebrow {{
       display: inline-flex;
       align-items: center;
@@ -263,6 +282,33 @@ def _build_html_document(data: Mapping[str, Any], title: str) -> str:
       height: 8px;
       border-radius: 999px;
       background: linear-gradient(180deg, #7b61ff, #117a57);
+    }}
+
+    .hero__date-wrap {{
+      padding: 10px 14px 11px;
+      border: 1px solid rgba(16, 32, 51, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.70);
+      text-align: right;
+      min-width: 220px;
+    }}
+
+    .hero__date-label {{
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+    }}
+
+    .hero__date {{
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--text);
     }}
 
     .hero__title {{
@@ -580,6 +626,16 @@ def _build_html_document(data: Mapping[str, Any], title: str) -> str:
         font-size: 16px;
       }}
 
+      .hero__topbar {{
+        flex-direction: column;
+        align-items: stretch;
+      }}
+
+      .hero__date-wrap {{
+        text-align: left;
+        min-width: 0;
+      }}
+
       .sentiment__row {{
         flex-direction: column;
         align-items: stretch;
@@ -616,7 +672,10 @@ def _build_html_document(data: Mapping[str, Any], title: str) -> str:
 <body>
   <main class="page">
     <section class="hero">
-      <div class="hero__eyebrow">Market briefing</div>
+      <div class="hero__topbar">
+        <div class="hero__eyebrow">Market briefing</div>
+        {_render_report_date()}
+      </div>
       <h1 class="hero__title">{_escape(title)}</h1>
       <p class="hero__subtitle">{_escape(eli40 or final_vibe_summary or "Structured market view generated from the supplied JSON input.")}</p>
     </section>
