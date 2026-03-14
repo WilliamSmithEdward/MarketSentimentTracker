@@ -126,7 +126,7 @@ def get_news_json(keywords: list[str]) -> list[dict]:
     results: list[dict] = []
 
     for keyword in keywords:
-        url = (
+        url = ( 
             "https://newsapi.org/v2/top-headlines"
             f"?country=us&category=business&q={quote_plus(keyword)}&apiKey={api_key}"
         )
@@ -156,6 +156,7 @@ def main() -> None:
         - Treat sensational or low-information headlines as lower quality evidence
         - Return values that strictly fit the schema
         - Do not add any keys not defined by the schema
+        - Assume the reader understands only the provided input was used for the analysis, don't need to explicitly state this in the output
 
         Input news JSON:
         {json.dumps(news_json, ensure_ascii=False)}
