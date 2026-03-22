@@ -14,6 +14,8 @@ This Python application pulls live business and geopolitical news from NewsAPI, 
 ### Live Demo
 **[View the Latest Report](https://williamsmithedward.github.io/MarketSentimentTracker/)**  
 
+![vibe_analysis_screenshot.png](images/vibe_analysis_screenshot.png)
+
 ### Built For Real-World Use
 Currently running during the 2026 Iran conflict — the system correctly identified the oil shock, inflation pressure, reduced Fed easing expectations, and the resulting mildly risk-off environment.
 
